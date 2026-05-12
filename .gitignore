@@ -216,3 +216,6 @@ ModelManifest.xml
 _work/
 build.sh
 games/
+Release/DeusEx.exp
+Release/DeusEx.lib
+Release/deusex.exe
