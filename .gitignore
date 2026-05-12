@@ -211,4 +211,8 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
- *.VC.opendb
+*.VC.opendb
+
+_work/
+build.sh
+games/
