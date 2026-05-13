@@ -4,6 +4,9 @@ This is a fork of the [Deus Exe](https://kentie.net/article/dxguide/) to add XIn
 
 By itself this project just enables XInput and hands the events to the Unreal engine. You'll be able to bind buttons to actions, but that's not particularly useful since the game is not designed for controllers at all. The sister project [DXController](https://git.dsg.is/dsg/DXController) is a mod to overhaul the UI and input handling in the game's scripts, with the goal of providing a first-class controller experience.
 
+You'll also need a modern renderer like kentie's d3d10drv. The game will crash if you launch it with the default d3ddrv.
+https://www.kentie.net/article/d3d10drv/
+
 ## Building
 
 Open `DeusExe.sln` in Visual Studio 2022 with the v145 toolset, or run
