@@ -58,5 +58,5 @@ be bound in `DeusEx.ini` or via the in-game key binding screen.
 | Flag           | Effect |
 | -------------- | ------ |
 | `-skipdialog`  | Skips the launcher dialog and starts the game immediately. |
-| `-localdata`   | Stores configuration and saves in the game directory instead of `Documents\Deus Ex`. |
+| `-userprofile` | Stores configuration and saves in `Documents\Deus Ex` instead of the game directory. |
 
