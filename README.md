@@ -25,11 +25,15 @@ Settings live in the `[DeusExe]` section of `DeusEx.ini` (or whichever
 The active controller is whichever connected slot most recently produced
 input. Stick/trigger ranges are read raw and rescaled past the configured
 deadzone or threshold, so axes hit full magnitude near the physical edge.
+Each stick also has a configurable response curve for tuning how small
+deflections map to output magnitude.
 
 | Key | Type | Default | Notes |
 | --- | ---- | ------- | ----- |
 | `XInputLeftStickDeadzone` | int (0..32767) | `2500` | Radial deadzone for the left stick, in raw SHORT units. |
 | `XInputRightStickDeadzone` | int (0..32767) | `2500` | Radial deadzone for the right stick. |
+| `XInputLeftStickExponent` | float | `2.0` | Response curve applied to the left (movement) stick magnitude. `1.0` is linear; `>1.0` gives finer control at small deflections while still reaching full speed at full deflection; `<1.0` is snappier near centre. |
+| `XInputRightStickExponent` | float | `2.0` | Response curve applied to the right (look) stick magnitude. `1.0` is linear; `>1.0` gives finer aim at small deflections while still reaching full turn speed at full deflection; `<1.0` is snappier near centre. |
 | `XInputTriggerThreshold` | int (0..255) | `30` | Trigger pull below this is treated as zero. Microsoft's default is `30`. |
 | `XInputMouseActivityPx` | int | `4` | Mouse motion of this many pixels marks the mouse as the active input source. |
 | `XInputPadActiveGraceMs` | int | `500` | Time after the last pad input during which the pad still counts as "active". |
