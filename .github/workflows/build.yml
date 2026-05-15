@@ -1,0 +1,77 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore SDK from cache
+        id: cache-sdk
+        uses: actions/cache@v4
+        with:
+          path: games
+          key: sdk-deusex-v1
+
+      - name: Fetch SDK
+        if: steps.cache-sdk.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          gh release download sdk --repo $env:GITHUB_REPOSITORY -p '*.zip' -D _sdk
+          Expand-Archive -Path _sdk\*.zip -DestinationPath games
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build
+        shell: pwsh
+        run: |
+          msbuild DeusExe.sln `
+            /p:Configuration=Release `
+            /p:Platform=Win32 `
+            /p:PlatformToolset=v143 `
+            /m -verbosity:minimal -nologo
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deusex-${{ github.sha }}
+          path: Release/deusex.exe
+
+      - name: Package release zip
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          $stage = "DeusExe-XInput-$env:GITHUB_REF_NAME"
+          New-Item -ItemType Directory -Path $stage | Out-Null
+          Copy-Item Release/deusex.exe   $stage/
+          Copy-Item Release/DeusExe.u    $stage/
+          Copy-Item Readme.htm           $stage/
+          Copy-Item README.md            $stage/
+          Compress-Archive -Path $stage -DestinationPath "$stage.zip"
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          gh release create $env:GITHUB_REF_NAME `
+            "DeusExe-XInput-$env:GITHUB_REF_NAME.zip" `
+            --title $env:GITHUB_REF_NAME `
+            --generate-notes
