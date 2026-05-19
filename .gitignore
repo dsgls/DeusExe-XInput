@@ -219,3 +219,7 @@ games/
 Release/DeusEx.exp
 Release/DeusEx.lib
 Release/deusex.exe
+
+# Superpowers plugin specs and plans
+/docs/superpowers/
+

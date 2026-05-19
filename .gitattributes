@@ -1,11 +1,15 @@
-* text=auto eol=crlf
+* text=auto eol=lf
 *.png binary
 *.jpg binary
 *.jpeg binary
 *.gif binary
 *.ico binary
+*.bmp binary
 *.pdf binary
 *.zip binary
 *.gz binary
 *.woff binary
 *.woff2 binary
+*.u binary
+# Vendor SDK patch must stay CRLF to match the CRLF SDK headers it patches
+patches/*.patch text eol=crlf
