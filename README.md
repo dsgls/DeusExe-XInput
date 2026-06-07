@@ -33,7 +33,8 @@ Each stick has a configurable response curve — chosen from `Linear`,
 output magnitude.
 
 Unlike the rest of the project's settings, the controller keys below
-live in the `[DXController]` section of `DeusEx.ini`, not `[DeusExe]`.
+live in the `[DXController.ControllerSettings]` section of `DeusEx.ini`,
+not `[DeusExe]`.
 
 | Key | Type | Default | Notes |
 | --- | ---- | ------- | ----- |
