@@ -1,5 +1,13 @@
 # Deus Exe with XInput support
 
+## DEPRECATION NOTICE
+
+This code has been merged into [https://github.com/dsgls/DXController](the main DXController project), and is being developed there. Use that instead.
+
+Below is the original README.md contents.
+
+## Description
+
 This is a fork of the [Deus Exe](https://kentie.net/article/dxguide/) to add XInput support so Xbox controllers can be used with Deus Ex.
 
 By itself this project just enables XInput and hands the events to the Unreal engine. You'll be able to bind buttons to actions, but that's not particularly useful since the game is not designed for controllers at all. The sister project [DXController](https://git.dsg.is/dsg/DXController) is a mod to overhaul the UI and input handling in the game's scripts, with the goal of providing a first-class controller experience.
